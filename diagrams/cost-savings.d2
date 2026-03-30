@@ -1,0 +1,125 @@
+# Token Economy - Cost Savings
+
+direction: right
+
+# Without GBNF
+without: {
+  label: |md
+    ## 💸 WITHOUT GBNF
+    
+    **1,000 API calls**
+    
+    **150 tokens × 1,000 = 150,000 tokens**
+    
+    **Cost: $0.075**
+  |
+  
+  style: {
+    fill: "#ffebee"
+    stroke: "#c62828"
+  }
+  
+  # Stacked bars showing token distribution
+  signal: {
+    shape: rectangle
+    label: "Signal: 30,000"
+    height: 60
+    style: {
+      fill: "#c8e6c9"
+    }
+  }
+  
+  noise: {
+    shape: rectangle
+    label: "Noise: 120,000"
+    height: 240
+    style: {
+      fill: "#ffcdd2"
+    }
+  }
+}
+
+# Arrow
+arrow: {
+  shape: diamond
+  label: |md
+    **80%**
+    **SAVINGS**
+  |
+  style: {
+    fill: "#fff9c4"
+    stroke: "#f57f17"
+    stroke-width: 2
+  }
+}
+
+without -> arrow: {
+  style.stroke: "#999"
+  style.stroke-width: 2
+}
+
+# With GBNF
+with: {
+  label: |md
+    ## 🎯 WITH GBNF
+    
+    **1,000 API calls**
+    
+    **30 tokens × 1,000 = 30,000 tokens**
+    
+    **Cost: $0.015**
+  |
+  
+  style: {
+    fill: "#e8f5e9"
+    stroke: "#2e7d32"
+    stroke-width: 2
+  }
+  
+  signal: {
+    shape: rectangle
+    label: "Signal: 28,500"
+    height: 285
+    style: {
+      fill: "#a5d6a7"
+    }
+  }
+  
+  noise: {
+    shape: rectangle
+    label: "Noise: 1,500"
+    height: 15
+    style: {
+      fill: "#ef9a9a"
+    }
+  }
+}
+
+arrow -> with: {
+  style.stroke: "#4caf50"
+  style.stroke-width: 3
+}
+
+# Benefits
+benefits: {
+  label: |md
+    ## 🚀 BENEFITS
+    
+    • 80% Cost Reduction
+    • 5X Faster Parsing
+    • 5X Better Precision
+    • 95% Signal Strength
+    • 9 Language Support
+  |
+  
+  style: {
+    fill: "#e3f2fd"
+    stroke: "#1976d2"
+    stroke-width: 2
+  }
+}
+
+with -> benefits: {
+  style.stroke: "#1976d2"
+  style.stroke-dash: 5
+}

@@ -1,0 +1,182 @@
+# 9 Languages Support
+
+languages: {
+  grid-columns: 3
+  grid-gap: 20
+  
+  en: {
+    label: |md
+      ## 🇺🇸 EN
+      **Created**
+      
+      ✓ 95% signal
+    |
+    style: {
+      fill: "#e3f2fd"
+      stroke: "#1976d2"
+    }
+  }
+  
+  sv: {
+    label: |md
+      ## 🇸🇪 SV
+      **Skapad**
+      
+      ✓ 95% signal
+    |
+    style: {
+      fill: "#ffd54f"
+      stroke: "#f57c00"
+    }
+  }
+  
+  de: {
+    label: |md
+      ## 🇩🇪 DE
+      **Erstellt**
+      
+      ✓ 95% signal
+    |
+    style: {
+      fill: "#e8f5e9"
+      stroke: "#388e3c"
+    }
+  }
+  
+  es: {
+    label: |md
+      ## 🇪🇸 ES
+      **Creado**
+      
+      ✓ 95% signal
+    |
+    style: {
+      fill: "#ffccbc"
+      stroke: "#d84315"
+    }
+  }
+  
+  fr: {
+    label: |md
+      ## 🇫🇷 FR
+      **Créé**
+      
+      ✓ 95% signal
+    |
+    style: {
+      fill: "#f3e5f5"
+      stroke: "#7b1fa2"
+    }
+  }
+  
+  it: {
+    label: |md
+      ## 🇮🇹 IT
+      **Creato**
+      
+      ✓ 95% signal
+    |
+    style: {
+      fill: "#ffebee"
+      stroke: "#c62828"
+    }
+  }
+  
+  pt: {
+    label: |md
+      ## 🇵🇹 PT
+      **Criado**
+      
+      ✓ 95% signal
+    |
+    style: {
+      fill: "#e0f2f1"
+      stroke: "#00695c"
+    }
+  }
+  
+  nl: {
+    label: |md
+      ## 🇳🇱 NL
+      **Gemaakt**
+      
+      ✓ 95% signal
+    |
+    style: {
+      fill: "#fff3e0"
+      stroke: "#ef6c00"
+    }
+  }
+  
+  pl: {
+    label: |md
+      ## 🇵🇱 PL
+      **Utworzony**
+      
+      ✓ 95% signal
+    |
+    style: {
+      fill: "#fbe9e7"
+      stroke: "#bf360c"
+    }
+  }
+}
+
+# Filtration layer
+noise: {
+  shape: rectangle
+  label: |md
+    ## 🧹 NOISE FILTER
+    
+    **Filtered OUT:**
+    • "Certainly"
+    • "Absolut"
+    • "Natürlich"
+    • "Por supuesto"
+    • "Bien sûr"
+    • etc.
+    
+    **Preserved:**
+  |
+  
+  style: {
+    fill: "#ffebee"
+    stroke: "#c62828"
+    stroke-dash: 5
+  }
+}
+
+# Connect languages to noise filter
+languages.en -> noise: {style.stroke: "#90a4ae"}
+languages.sv -> noise: {style.stroke: "#90a4ae"}
+languages.de -> noise: {style.stroke: "#90a4ae"}
+languages.es -> noise: {style.stroke: "#90a4ae"}
+languages.fr -> noise: {style.stroke: "#90a4ae"}
+languages.it -> noise: {style.stroke: "#90a4ae"}
+languages.pt -> noise: {style.stroke: "#90a4ae"}
+languages.nl -> noise: {style.stroke: "#90a4ae"}
+languages.pl -> noise: {style.stroke: "#90a4ae"}
+
+result: {
+  shape: cylinder
+  label: |md
+    ## 🎯 RESULT
+    
+    **Universal Signal**
+    
+    All languages: 95% signal
+    Same efficiency
+    Same structure
+  |
+  
+  style: {
+    fill: "#e8f5e9"
+    stroke: "#2e7d32"
+    stroke-width: 3
+  }
+}
+
+noise -> result: {
+  style.stroke: "#4caf50"
+  style.stroke-width: 4
+}

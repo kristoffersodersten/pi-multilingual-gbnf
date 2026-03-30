@@ -1,0 +1,100 @@
+# Signal Amplification Flow
+
+direction: right
+
+# Input
+input: {
+  shape: cylinder
+  label: |md
+    **INPUT**  
+    "Skapa fil"
+  |
+  style: {
+    fill: "#e8f4e8"
+    stroke: "#4caf50"
+    stroke-width: 2
+  }
+}
+
+# Processors
+detector: {
+  shape: diamond
+  label: |md
+    **DETECTOR**  
+    Language ID
+    [sv]
+  |
+  style: {
+    fill: "#fff3e0"
+    stroke: "#ff9800"
+  }
+}
+
+validator: {
+  shape: rectangle
+  label: |md
+    **VALIDATOR**  
+    Grammar Check
+    ✓ OK
+  |
+  style: {
+    fill: "#e3f2fd"
+    stroke: "#2196f3"
+  }
+}
+
+filter: {
+  shape: hexagon
+  label: |md
+    **FILTER**  
+    Remove Noise
+    "tack" → ø
+  |
+  style: {
+    fill: "#fce4ec"
+    stroke: "#e91e63"
+  }
+}
+
+# Output
+output: {
+  shape: cylinder
+  label: |md
+    **OUTPUT**  
+    ✏️ SKAPAD: fil.txt  
+    95% Signal
+  |
+  style: {
+    fill: "#e8f5e9"
+    stroke: "#2e7d32"
+    stroke-width: 3
+  }
+}
+
+# Connections
+input -> detector: {style.stroke: "#666"; style.stroke-dash: 3}
+detector -> validator: {style.stroke: "#666"}
+validator -> filter: {style.stroke: "#666"}
+filter -> output: {
+  style.stroke: "#4caf50"
+  style.stroke-width: 3
+}
+
+# Stats
+stats: |md
+  **METRICS**
+  
+  • Input: 20 tokens
+  • Output: 5 tokens
+  • Noise Removed: 75%
+  • Signal: 95%
+  
+  **5X AMPLIFICATION**
+| {
+  near: bottom-center
+  style: {
+    fill: "#f5f5f5"
+    stroke: "#9e9e9e"
+    stroke-dash: 5
+  }
+}

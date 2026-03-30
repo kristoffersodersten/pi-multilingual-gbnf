@@ -1,0 +1,83 @@
+# Before vs After Comparison
+
+# Traditional LLM
+before: {
+  label: |md
+    ## 📝 TRADITIONAL LLM
+    
+    **50 tokens**
+  |
+  
+  signal: {
+    shape: rectangle
+    label: |md
+      ### Signal (20%)
+      "SKAPA..."
+    |
+    height: 40
+    style: {
+      fill: "#c8e6c9"
+    }
+  }
+  
+  noise: {
+    shape: rectangle
+    label: |md
+      ### Noise (80%)
+      "Visst, jag kan gärna..."
+    |
+    height: 160
+    style: {
+      fill: "#ffcdd2"
+    }
+  }
+}
+
+# With GBNF
+after: {
+  label: |md
+    ## 🎯 WITH GBNF
+    
+    **10 tokens**
+  |
+  
+  signal: {
+    shape: rectangle
+    label: |md
+      ### Signal (95%)
+      "✏️ SKAPAD..."
+    |
+    height: 190
+    style: {
+      fill: "#a5d6a7"
+      stroke: "#2e7d32"
+      stroke-width: 2
+    }
+  }
+  
+  noise: {
+    shape: rectangle
+    label: |md
+      ### Noise (5%)
+    |
+    height: 10
+    style: {
+      fill: "#ef9a9a"
+    }
+  }
+}
+
+# Connection showing transformation
+before -> after: {
+  label: |md
+    **
+    • 5X Less Tokens
+    • 4X Better SNR
+    • 80% Cost Reduction
+    **
+  |
+  style: {
+    stroke: "#4caf50"
+    stroke-width: 3
+  }
+}
