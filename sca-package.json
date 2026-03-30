@@ -1,0 +1,39 @@
+{
+  "name": "pi-multilingual-gbnf",
+  "displayName": "Multilingual GBNF",
+  "version": "1.0.0",
+  "description": "Grammar constraints för 9 språk - för noise-free, deterministic responses",
+  "icon": "🌍",
+  "author": "Your Name",
+  "license": "MIT",
+  "tags": ["language", "i18n", "constraints", "gbnf", "multilingual", "swedish", "german", "french"],
+  "entry": "dist/index.js",
+  "compatiblePiVersion": ">=0.60.0",
+  "files": ["dist/", "README.md", "LICENSE"],
+  "size": "~50KB",
+  "tools": [
+    {
+      "name": "validate_grammar",
+      "description": "Validate multilingual text against GBNF grammar",
+      "parameters": ["text", "mode", "language"]
+    },
+    {
+      "name": "constrain_response",
+      "description": "Apply grammar constraints to next response",
+      "parameters": ["mode", "language", "maxTokens"]
+    },
+    {
+      "name": "detect_language",
+      "description": "Auto-detect language from input text",
+      "parameters": ["text"]
+    },
+    {
+      "name": "list_languages",
+      "description": "Show all 9 supported languages",
+      "parameters": []
+    }
+  ],
+  "languages": ["en", "sv", "de", "es", "fr", "it", "pt", "nl", "pl"],
+  "homepage": "https://github.com/yourusername/pi-multilingual-gbnf",
+  "repository": "https://github.com/yourusername/pi-multilingual-gbnf"
+}
