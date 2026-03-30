@@ -8,7 +8,7 @@
  * @author Community
  */
 
-import type { ExtensionAPI, ExtensionConfig } from '@mariozechner/pi-coding-agent';
+import type { ExtensionAPI, ExtensionFlag, ToolResultEvent } from '@mariozechner/pi-coding-agent';
 import { Type } from '@sinclair/typebox';
 import { MultilingualGrammarValidator } from './validator.js';
 import { MultilingualResponseConstrain } from './constrain.js';
@@ -19,7 +19,7 @@ import {
 } from './locales/index.js';
 import type { GrammarMode, LanguageCode } from './types.js';
 
-export default function (pi: ExtensionAPI, config: ExtensionConfig) {
+export default function (pi: ExtensionAPI, config: ExtensionFlag) {
   const validator = new MultilingualGrammarValidator();
   const constrain = new MultilingualResponseConstrain();
   
@@ -31,11 +31,11 @@ export default function (pi: ExtensionAPI, config: ExtensionConfig) {
   } | null = null;
   
   // Subscribe to response events to apply constraints
-  pi.on('tool_result', async (event, ctx) => {
+  pi.on('tool_result', async (event: any, ctx) => {
     if (activeConstraint && event.result?.content) {
       const originalText = event.result.content
-        .filter(c => c.type === 'text')
-        .map(c => c.text)
+        .filter((c: any) => c.type === 'text')
+        .map((c: any) => c.text)
         .join('');
       
       if (originalText) {
@@ -178,31 +178,29 @@ ${result.valid ? `\nNormalized Output:\n${result.normalized}` : ''}`
   // Register commands
   pi.registerCommand('gbnf', {
     description: 'Multilingual GBNF commands',
-    subcommands: {
-      'languages': {
-        description: 'List supported languages',
-        handler: async (args, ctx) => {
+    handler: async (args: string, ctx: any) => {
+      const [subcommand, ...rest] = args?.split(' ') || [];
+      const subcommandArgs = rest.join(' ');
+      
+      switch (subcommand) {
+        case 'languages': {
           const langs = getSupportedLanguages();
           ctx.ui.notify(
             `Supported: ${langs.map(getLanguageName).join(', ')}`,
             'info'
           );
-        },
-      },
-      'detect': {
-        description: 'Detect language of text',
-        handler: async (args, ctx) => {
-          const detected = detectLanguage(args || '');
+          break;
+        }
+        case 'detect': {
+          const detected = detectLanguage(subcommandArgs || '');
           ctx.ui.notify(
             `Detected: ${getLanguageName(detected)}`,
             'info'
           );
-        },
-      },
-      'constrain': {
-        description: 'Set constraint mode',
-        handler: async (args, ctx) => {
-          const [mode] = args?.split(' ') || [];
+          break;
+        }
+        case 'constrain': {
+          const [mode] = subcommandArgs.split(' ') || [];
           if (mode) {
             activeConstraint = {
               mode: mode as GrammarMode,
@@ -212,8 +210,14 @@ ${result.valid ? `\nNormalized Output:\n${result.normalized}` : ''}`
           } else {
             ctx.ui.notify('Usage: /gbnf constrain <mode>', 'warning');
           }
-        },
-      },
+          break;
+        }
+        default:
+          ctx.ui.notify(
+            'Available subcommands: languages, detect, constrain',
+            'info'
+          );
+      }
     },
   });
   

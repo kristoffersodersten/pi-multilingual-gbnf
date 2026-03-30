@@ -249,7 +249,7 @@ class JsonGrammar implements GrammarDefinition {
     try {
       JSON.parse(normalized);
     } catch (e) {
-      errors.push(`Invalid JSON: ${e.message}`);
+      errors.push(`Invalid JSON: ${(e as Error).message}`);
     }
     
     return {
