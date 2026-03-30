@@ -1,0 +1,64 @@
+{
+  "name": "pi-multilingual-gbnf",
+  "version": "1.0.0",
+  "description": "Multilingual GBNF grammar constraints for deterministic, noise-free responses in multiple languages",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/",
+    "schemas/",
+    "locales/",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "node --test dist/**/*.test.js",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "pi",
+    "extension",
+    "gbnf",
+    "grammar",
+    "constrained",
+    "multilingual",
+    "i18n",
+    "l10n",
+    "deterministic",
+    "swedish",
+    "german",
+    "spanish",
+    "french"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/pi-multilingual-gbnf"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/pi-multilingual-gbnf/issues"
+  },
+  "homepage": "https://github.com/yourusername/pi-multilingual-gbnf#readme",
+  "peerDependencies": {
+    "@mariozechner/pi-coding-agent": ">=0.60.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "@types/node": "^20.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "pi-extension": {
+    "name": "Multilingual GBNF",
+    "description": "Grammar constraints for multiple languages",
+    "author": "Community",
+    "version": "1.0.0",
+    "tags": ["productivity", "language", "constraints"],
+    "icon": "🌍"
+  }
+}
