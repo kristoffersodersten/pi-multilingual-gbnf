@@ -3,11 +3,11 @@
 [![Pi Extension](https://img.shields.io/badge/pi-extension-blue)](https://github.com/mariozechner/pi-coding-agent)
 [![Version](https://img.shields.io/npm/v/pi-multilingual-gbnf)](https://www.npmjs.com/package/pi-multilingual-gbnf)
 [![License](https://img.shields.io/npm/l/pi-multilingual-gbnf)](LICENSE)
-[![Languages](https://img.shields.io/badge/languages-9-brightgreen)]()
+[![Languages](https://img.shields.io/badge/languages-27-brightgreen)]()
 
-**Grammar-constrained, noise-free outputs in 9 languages.**
+**Grammar-constrained, noise-free outputs in 27 languages.**
 
-A [pi](https://github.com/mariozechner/pi-coding-agent) extension that provides GBNF-style grammar validation and response constraints in multiple languages. Reduces token waste while preserving signal in English, Swedish, German, Spanish, French, Italian, Portuguese, Dutch, and Polish.
+A [pi](https://github.com/mariozechner/pi-coding-agent) extension that provides GBNF-style grammar validation and response constraints in multiple languages. Reduces token waste while preserving signal with full support for 9 core languages and detection for 18 extended languages using franc-ce language identification.
 
 ---
 
@@ -18,7 +18,7 @@ A [pi](https://github.com/mariozechner/pi-coding-agent) extension that provides 
 pi install pi-multilingual-gbnf
 
 # Or install from GitHub
-pi install github:yourusername/pi-multilingual-gbnf
+pi install github:kristoffersodersten/pi-multilingual-gbnf
 ```
 
 Then in pi:
@@ -37,7 +37,9 @@ Then in pi:
 
 ## ✨ Features
 
-### 🗣️ **9 Supported Languages**
+### 🗣️ **27 Supported Languages**
+
+#### Core Languages (full locale support)
 
 | Code | Language | Actions | Status |
 |------|----------|---------|--------|
@@ -50,6 +52,22 @@ Then in pi:
 | `pt` | Português (Portuguese) | ✅ | ✓ |
 | `nl` | Nederlands (Dutch) | ✅ | ✓ |
 | `pl` | Polski (Polish) | ✅ | ✓ |
+
+#### Extended Languages (detection via franc-ce)
+
+| Code | Language | Code | Language |
+|------|----------|------|----------|
+| `da` | Dansk (Danish) | `no` | Norsk (Norwegian) |
+| `fi` | Suomi (Finnish) | `cs` | Čeština (Czech) |
+| `sk` | Slovenčina (Slovak) | `hu` | Magyar (Hungarian) |
+| `ro` | Română (Romanian) | `bg` | Български (Bulgarian) |
+| `hr` | Hrvatski (Croatian) | `sr` | Српски (Serbian) |
+| `sl` | Slovenščina (Slovenian) | `el` | Ελληνικά (Greek) |
+| `tr` | Türkçe (Turkish) | `ru` | Русский (Russian) |
+| `uk` | Українська (Ukrainian) | `et` | Eesti (Estonian) |
+| `lv` | Latviešu (Latvian) | `lt` | Lietuvių (Lithuanian) |
+
+**Note:** Extended languages have detection support via franc-ce (175+ languages). Full locale strings can be added as needed.
 
 ### 🎛️ **Grammar Modes**
 
@@ -277,7 +295,7 @@ Contributions welcome! See [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## 📝 License
 
-MIT © [Your Name](https://github.com/yourusername)
+MIT © [Kristoffer Sodersten](https://github.com/kristoffersodersten)
 
 ---
 
@@ -285,8 +303,8 @@ MIT © [Your Name](https://github.com/yourusername)
 
 - [Pi Documentation](https://github.com/mariozechner/pi-coding-agent)
 - [NPM Package](https://www.npmjs.com/package/pi-multilingual-gbnf)
-- [GitHub Repository](https://github.com/yourusername/pi-multilingual-gbnf)
-- [Report Issues](https://github.com/yourusername/pi-multilingual-gbnf/issues)
+- [GitHub Repository](https://github.com/kristoffersodersten/pi-multilingual-gbnf)
+- [Report Issues](https://github.com/kristoffersodersten/pi-multilingual-gbnf/issues)
 
 ---
 

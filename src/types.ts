@@ -1,8 +1,40 @@
 /**
  * Type definitions for Multilingual GBNF
+ *
+ * Core languages (9): Full support with locale strings
+ * Extended languages: Detection only (can be added with locale strings as needed)
  */
 
-export type LanguageCode = 'en' | 'sv' | 'de' | 'es' | 'fr' | 'it' | 'pt' | 'nl' | 'pl';
+// Core supported languages with full locale support
+export type LanguageCode =
+  | 'en'  // English
+  | 'sv'  // Swedish
+  | 'de'  // German
+  | 'es'  // Spanish
+  | 'fr'  // French
+  | 'it'  // Italian
+  | 'pt'  // Portuguese
+  | 'nl'  // Dutch
+  | 'pl'  // Polish
+  // Extended languages (detection + basic support - add locale strings as needed)
+  | 'da'  // Danish
+  | 'no'  // Norwegian
+  | 'fi'  // Finnish
+  | 'cs'  // Czech
+  | 'sk'  // Slovak
+  | 'hu'  // Hungarian
+  | 'ro'  // Romanian
+  | 'bg'  // Bulgarian
+  | 'hr'  // Croatian
+  | 'sr'  // Serbian
+  | 'sl'  // Slovenian
+  | 'el'  // Greek
+  | 'tr'  // Turkish
+  | 'ru'  // Russian
+  | 'uk'  // Ukrainian
+  | 'et'  // Estonian
+  | 'lv'  // Latvian
+  | 'lt'; // Lithuanian
 
 export type GrammarMode = 
   | 'file_ops' 
@@ -47,6 +79,24 @@ export interface ActionDefinition {
   pt: string[];
   nl: string[];
   pl: string[];
+  da: string[];
+  no: string[];
+  fi: string[];
+  cs: string[];
+  sk: string[];
+  hu: string[];
+  ro: string[];
+  bg: string[];
+  hr: string[];
+  sr: string[];
+  sl: string[];
+  el: string[];
+  tr: string[];
+  ru: string[];
+  uk: string[];
+  et: string[];
+  lv: string[];
+  lt: string[];
 }
 
 export interface LocaleStrings {

@@ -13,23 +13,60 @@ import { detectLanguage, getLocale } from './locales/index.js';
 
 export class MultilingualGrammarValidator {
   private grammars: Map<GrammarMode, GrammarDefinition>;
-  
+
   constructor() {
     this.grammars = this.loadGrammars();
   }
-  
+
   /**
    * Validate text against a grammar mode
    */
   validate(
-    text: string, 
-    mode: GrammarMode, 
+    text: string,
+    mode: GrammarMode,
     constraint: Partial<GrammarConstraint> = {}
   ): ValidationResult {
-    const lang = constraint.language === 'auto' 
-      ? detectLanguage(text) 
+    // Validate input
+    if (text === null || text === undefined) {
+      return {
+        valid: false,
+        errors: ['Input text is null or undefined'],
+        warnings: [],
+        normalized: '',
+        matches: [],
+        metrics: { originalTokens: 0, normalizedTokens: 0, tokensSaved: 0 },
+        detectedLanguage: 'en'
+      };
+    }
+
+    if (typeof text !== 'string') {
+      return {
+        valid: false,
+        errors: ['Input text must be a string'],
+        warnings: [],
+        normalized: '',
+        matches: [],
+        metrics: { originalTokens: 0, normalizedTokens: 0, tokensSaved: 0 },
+        detectedLanguage: 'en'
+      };
+    }
+
+    if (!mode) {
+      return {
+        valid: false,
+        errors: ['Grammar mode is required'],
+        warnings: [],
+        normalized: text,
+        matches: [],
+        metrics: this.calculateMetrics(text, text),
+        detectedLanguage: 'en'
+      };
+    }
+
+    const lang = constraint.language === 'auto'
+      ? detectLanguage(text)
       : (constraint.language ?? detectLanguage(text));
-    
+
     const grammar = this.grammars.get(mode);
     if (!grammar) {
       return {
@@ -42,16 +79,28 @@ export class MultilingualGrammarValidator {
         detectedLanguage: lang
       };
     }
-    
-    return grammar.validate(text, lang, constraint);
+
+    try {
+      return grammar.validate(text, lang, constraint);
+    } catch (error) {
+      return {
+        valid: false,
+        errors: [`Validation error: ${(error as Error).message}`],
+        warnings: [],
+        normalized: text,
+        matches: [],
+        metrics: this.calculateMetrics(text, text),
+        detectedLanguage: lang
+      };
+    }
   }
-  
+
   /**
    * Load all grammar definitions
    */
   private loadGrammars(): Map<GrammarMode, GrammarDefinition> {
     const grammars = new Map<GrammarMode, GrammarDefinition>();
-    
+
     grammars.set('file_ops', new FileOpsGrammar());
     grammars.set('terse', new TerseGrammar());
     grammars.set('json', new JsonGrammar());
@@ -59,11 +108,11 @@ export class MultilingualGrammarValidator {
     grammars.set('plan', new PlanGrammar());
     grammars.set('api', new ApiGrammar());
     grammars.set('sql', new SqlGrammar());
-    
+
     return grammars;
   }
-  
-  calculateMetrics(original: string, normalized: string) {
+
+  private calculateMetrics(original: string, normalized: string) {
     const estimate = (s: string) => Math.ceil(s.length / 4);
     return {
       originalTokens: estimate(original),
@@ -142,16 +191,34 @@ class FileOpsGrammar implements GrammarDefinition {
  */
 class TerseGrammar implements GrammarDefinition {
   validate(
-    text: string, 
+    text: string,
     lang: LanguageCode,
     constraint: Partial<GrammarConstraint>
   ): ValidationResult {
     const errors: string[] = [];
     const warnings: string[] = [];
-    
+
+    // Check for empty or whitespace-only text
+    if (!text || !text.trim()) {
+      errors.push('Empty or whitespace-only text');
+      return {
+        valid: false,
+        errors,
+        warnings,
+        normalized: '',
+        matches: [],
+        metrics: {
+          originalTokens: 0,
+          normalizedTokens: 0,
+          tokensSaved: 0
+        },
+        detectedLanguage: lang
+      };
+    }
+
     // Icons valid across all locales
     const icons = '[✓✏️🔧❌📖→•◦⚠️⏳]';
-    
+
     // Check for single line constraint
     const lines = text.split('\n').filter(l => l.trim());
     if (lines.length > 1) {
@@ -164,7 +231,7 @@ class TerseGrammar implements GrammarDefinition {
     }
     
     // Check for noise words in detected language
-    const noiseWords: Record<LanguageCode, string[]> = {
+    const noiseWords: Record<string, string[]> = {
       en: ['certainly', 'sure', 'i\'d be happy', 'of course', 'let me', 'i can', 'i will', 'hope this helps'],
       sv: ['gärna', 'absolut', 'jag kan', 'jag vill', 'låt mig', 'hoppas det hjälper'],
       de: ['natürlich', 'sicher', 'ich würde', 'ich kann', 'lass mich', 'hoffe das hilft'],
@@ -209,22 +276,40 @@ class TerseGrammar implements GrammarDefinition {
  */
 class JsonGrammar implements GrammarDefinition {
   validate(
-    text: string, 
+    text: string,
     lang: LanguageCode,
     constraint: Partial<GrammarConstraint>
   ): ValidationResult {
     const errors: string[] = [];
     const warnings: string[] = [];
-    
+
+    // Check for empty or whitespace-only text
+    if (!text || !text.trim()) {
+      errors.push('Empty or whitespace-only text');
+      return {
+        valid: false,
+        errors,
+        warnings,
+        normalized: '',
+        matches: [],
+        metrics: {
+          originalTokens: 0,
+          normalizedTokens: 0,
+          tokensSaved: 0
+        },
+        detectedLanguage: lang
+      };
+    }
+
     // Prose markers by language
-    const proseMarkers: Record<LanguageCode, string[]> = {
+    const proseMarkers: Record<string, string[]> = {
       en: ['here is', 'the following', 'below is', 'here are', 'i have', 'this is'],
       sv: ['här är', 'följande', 'nedan är', 'här finns', 'jag har', 'detta är'],
       de: ['hier ist', 'folgendes', 'unten ist', 'hier sind', 'ich habe', 'das ist'],
       es: ['aquí está', 'lo siguiente', 'abajo está', 'aquí hay', 'tengo', 'esto es'],
       fr: ['voici', 'ce qui suit', 'ci-dessous', 'j\'ai', 'voilà', 'ceci est'],
       it: ['ecco', 'il seguente', 'qui sotto', 'qui ci sono', 'ho', 'questo è'],
-      pt: ['aqui está', 'o seguinte', 'abaixo está', 'aqui estão', 'eu tenho', 'isto é'],
+      pt: ['aqui está', 'o seguinte', 'abaixo está', 'aqui estão', 'eu tengo', 'isto é'],
       nl: ['hier is', 'het volgende', 'hieronder is', 'hier zijn', 'ik heb', 'dit is'],
       pl: ['oto', 'poniżej', 'tutaj jest', 'tutaj są', 'mam', 'to jest'],
     };
