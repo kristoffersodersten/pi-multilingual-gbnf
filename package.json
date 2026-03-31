@@ -1,14 +1,12 @@
 {
   "name": "pi-multilingual-gbnf",
   "version": "2.0.0",
-  "description": "Multilingual GBNF grammar constraints for deterministic, noise-free responses in multiple languages",
+  "description": "Grammar-constrained, noise-free outputs in 27 languages",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist/",
-    "schemas/",
-    "locales/",
     "README.md",
     "LICENSE"
   ],
