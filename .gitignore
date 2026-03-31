@@ -27,3 +27,8 @@ Thumbs.db
 .npmrc
 .env
 .env.local
+
+# Archives
+*.zip
+*.tar
+*.tar.gz
